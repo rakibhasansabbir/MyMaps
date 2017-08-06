@@ -7,9 +7,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
 public class GMActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -49,5 +52,12 @@ public class GMActivity extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+        goToLocation(24.827876,89.3514836);
+    }
+
+    private void goToLocation(double lat, double log) {
+        LatLng ll = new LatLng(lat, log);
+        CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+        mGoogleMap.moveCamera(update);
     }
 }
