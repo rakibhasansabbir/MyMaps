@@ -52,12 +52,17 @@ public class GMActivity extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        goToLocation(24.827876,89.3514836);
+        goToLocationZoom(24.827876,89.3514836,15);
     }
 
     private void goToLocation(double lat, double log) {
         LatLng ll = new LatLng(lat, log);
         CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+        mGoogleMap.moveCamera(update);
+    }
+    private void goToLocationZoom(double lat, double log, float zoom) {
+        LatLng ll = new LatLng(lat, log);
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll,zoom);
         mGoogleMap.moveCamera(update);
     }
 }
