@@ -19,6 +19,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -87,7 +89,7 @@ public class GMActivity extends AppCompatActivity implements OnMapReadyCallback 
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll,zoom);
         mGoogleMap.moveCamera(update);
     }
-
+    Marker marker;
     public void goLocation(View view) throws IOException {
         EditText et = (EditText) findViewById(R.id.editText);
         String location = et.getText().toString();
@@ -103,6 +105,14 @@ public class GMActivity extends AppCompatActivity implements OnMapReadyCallback 
         double lat = address.getLatitude();
         double log = address.getLongitude();
         goToLocationZoom(lat,log,15);
+
+        if(marker != null){
+            marker.remove();
+        }
+        MarkerOptions options = new MarkerOptions()
+                .title(locality)
+                .position(new LatLng(lat,log));
+        marker = mGoogleMap.addMarker(options);
 
     }
 }
